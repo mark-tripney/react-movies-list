@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Movie } from './Movie';
+import { Filter } from '../Filter';
 
 const movies = [
   { name: 'The Grand Budapest Hotel', year: '2014' },
@@ -13,23 +15,14 @@ export function MoviesList() {
   return (
     <div>
       <h1>(Some) films of Wes Anderson</h1>
-      <label>
-        Filter:
-        <input
-          type="text"
-          onChange={e => setFilter(e.target.value)}
-          value={filter}
-        />
-      </label>
+      <Filter filter={filter} setFilter={setFilter} />
       <ul>
         {movies
           .filter(movie =>
             movie.name.toLowerCase().includes(filter.toLowerCase())
           )
           .map(movie => (
-            <li key={movie.name}>
-              {movie.name} ({movie.year})
-            </li>
+            <Movie key={movie.name} movie={movie} />
           ))}
       </ul>
     </div>
